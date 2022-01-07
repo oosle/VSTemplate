@@ -1,0 +1,23 @@
+﻿<Window
+    x:Class="$safeprojectname$.$safeitemname$"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:$safeprojectname$"
+    mc:Ignorable="d"
+    Title="$safeitemrootname$" Height="450" Width="800"
+    xmlns:view="clr-namespace:$safeprojectname$.ControlLib;assembly=$safeprojectname$.ControlLib"
+    Initialized="Window_Initialized">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <view:PartnerControl Loaded="PartnerControl_Loaded" />
+
+        <Button x:Name="btnDeploy" Grid.Row="1" HorizontalAlignment="Left" Width="80" Height="20" VerticalAlignment="Bottom" Click="btnDeployClick" Margin="5,0,0,5">Deploy</Button>
+    </Grid>
+</Window>

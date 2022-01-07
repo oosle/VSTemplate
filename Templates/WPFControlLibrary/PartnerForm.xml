@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PartnerForm>
+  <Init>
+<![CDATA[
+import clr
+clr.AddReference('PresentationFramework')
+
+from System.Windows import LogicalTreeHelper, MessageBox, Window
+from System import Exception
+from System.IO import Path, File
+]]>
+  </Init>
+  <Loaded>
+<![CDATA[
+try:
+    formName = "$safeprojectname$"
+    dllName = "$safeprojectname$.dll"
+
+    dllPath = _tikitResolver.Resolve("[sql:SELECT Form FROM Mp_Sys_Views WHERE Name = '{0}']".format(formName))
+    dllPath = Path.GetDirectoryName(dllPath)
+    dllPath = Path.Combine(dllPath, dllName)
+
+    if not File.Exists(dllPath):
+        raise Exception("Unable to locate DLL\n\n{0}".format(dllPath))
+
+    clr.AddReferenceToFileAndPath(dllPath)
+
+    from $safeprojectname$ import PartnerControl
+
+    MainView = LogicalTreeHelper.FindLogicalNode(_tikitSender, 'MainView')
+    MainView.Content = PartnerControl(
+        "Data Source={0};Initial Catalog={1};Integrated Security=SSPI".format(
+            _tikitResolver.Resolve("[sql:select @@servername]"),
+            _tikitResolver.Resolve("[sql:select db_name()]")
+        ),
+        _tikitEntity,
+        _tikitMatter,
+        _tikitUser,
+        _tikitParentView
+    )
+
+except Exception as Ex:
+    MessageBox.Show(Ex.Message)
+]]>
+  </Loaded>
+</PartnerForm>
