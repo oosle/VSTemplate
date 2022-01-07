@@ -51,8 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Utility.cs" />
-    <Compile Include="Classes\VisualStudio.cs" />
+    <Compile Include="Source\Utility.cs" />
+    <Compile Include="Source\VisualStudio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Templates\ClassLibrary\AssemblyInfo.cs">
